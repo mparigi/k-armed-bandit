@@ -1,23 +1,15 @@
 from bandits.DistroBandit import DistroBandit
 from distributions.Normal import Normal
+from GameState import GameState
 
 import random
-
-
-class GameState():
-	def __init__(self, bandit):
-		self.bandit = bandit
-		self.total_reward = 0
-
-	def select(self, j):
-		reward = self.bandit.select(j)
-		self.total_reward += reward
-		return reward
 
 def run_game(k):
 	mean_low, mean_high = (-5, 5)
 	stdev_low, stdev_high = (0, 3)
-	distros = [Normal(random.uniform(mean_low, mean_high), random.uniform(stdev_low, stdev_high))] * k
+	distros = []
+	for _ in range(k):
+		distros.append(Normal(random.uniform(mean_low, mean_high), random.uniform(stdev_low, stdev_high)))
 	bandit = DistroBandit(distros)
 
 	game_state = GameState(bandit)
