@@ -32,7 +32,7 @@ def run_game(k, timesteps, verbose=False):
 	optimal_stats = (0, 0) # num optimal, total
 
 	print(f"The optimal action is action {optimal_action} with mean {highest_mean} and stdev {distros[optimal_action].stdev}")
-
+	print("*")
 	for _ in range(timesteps):
 		action = agent.action()
 		reward = game_state.select(action)
@@ -41,7 +41,8 @@ def run_game(k, timesteps, verbose=False):
 			print(f"Agent chose action {action} and got a reward of {reward}.")
 		agent.update(action, reward)
 
-	print("Total Reward: ", game_state.total_reward)
+	print("*")
+	print("Agent's Total Reward: ", game_state.total_reward)
 	print(f"The Agent chose the optimal action {(optimal_stats[0] / optimal_stats[1]) * 100}% of the time")
 	print(f"If the Agent had chose the optimal action every time, we would expect a total reward of {highest_mean * timesteps}.")
 
