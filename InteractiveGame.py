@@ -1,6 +1,8 @@
 from bandits.DistroBandit import DistroBandit
 from distributions.Normal import Normal
 
+import random
+
 
 class GameState():
 	def __init__(self, bandit):
@@ -13,10 +15,14 @@ class GameState():
 		return reward
 
 def run_game(k):
-	distros = [Normal(random.uniform(-5, 5), random.uniform(0, 3))] * k
+	mean_low, mean_high = (-5, 5)
+	stdev_low, stdev_high = (0, 3)
+	distros = [Normal(random.uniform(mean_low, mean_high), random.uniform(stdev_low, stdev_high))] * k
 	bandit = DistroBandit(distros)
 
 	game_state = GameState(bandit)
+
+	print(f"This is the k-armed bandit game for k={k}.\nThe action rewards are sampled from normal distributions, which are randomly initialized for each action with each mean uniformly sampled from ({mean_low}, {mean_high}) and each standard deviation uniformly sampled from ({stdev_low}, {stdev_high}).")
 
 	while True:
 		selection = input("Select an Action...\n\t\ttotal reward - prints accumulated reward\n\t\t0-k - do an action\n\t\tquit - quit the game\n")
