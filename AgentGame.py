@@ -1,7 +1,7 @@
 from bandits.DistroBandit import DistroBandit
 from distributions.Normal import Normal
 from GameState import GameState
-from agents.EpsilonGreedyAgent import EpsilonGreedyAgent
+from agents.EpsilonGreedySampleAverageAgent import EpsilonGreedySampleAverageAgent
 
 import random
 
@@ -24,7 +24,7 @@ def run_game(k, timesteps, verbose=False):
 	bandit = DistroBandit(distros)
 
 	game_state = GameState(bandit)
-	agent = EpsilonGreedyAgent(k)
+	agent = EpsilonGreedySampleAverageAgent(k)
 
 	print(f"This is the k-armed bandit game for k={k}.\nThe action rewards are sampled from normal distributions, which are randomly initialized for each action with each mean uniformly sampled from ({mean_low}, {mean_high}) and each standard deviation uniformly sampled from ({stdev_low}, {stdev_high}).")
 
