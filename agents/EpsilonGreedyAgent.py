@@ -1,7 +1,7 @@
 import random
 
 class EpsilonGreedyAgent():
-	def __init__(self, k, epsilon):
+	def __init__(self, k, epsilon=0.2):
 		assert epsilon >= 0 and epsilon <= 1
 		assert k > 0
 		self.k = k
