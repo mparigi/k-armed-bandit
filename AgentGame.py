@@ -7,6 +7,7 @@ import argparse
 
 import random
 
+
 def run_game(k, timesteps, verbose=False):
     mean_low, mean_high = (8, 16)
     stdev_low, stdev_high = (2, 6)
@@ -16,7 +17,8 @@ def run_game(k, timesteps, verbose=False):
         distros.append(
             Normal(
                 round(random.uniform(mean_low, mean_high), 2),
-                round(random.uniform(stdev_low, stdev_high), 2))
+                round(random.uniform(stdev_low, stdev_high), 2),
+            )
         )
 
     bandit = DistroBandit(distros)
@@ -24,12 +26,14 @@ def run_game(k, timesteps, verbose=False):
     game_state = GameState(bandit)
     agent = ExploreFirstAgent(k, num_samples=10)
 
-    print(f"This is the k-armed bandit game for k={k}.\nThe action rewards are sampled from normal distributions, which are randomly initialized for each action with each mean uniformly sampled from ({mean_low}, {mean_high}) and each standard deviation uniformly sampled from ({stdev_low}, {stdev_high}).")
+    print(
+        f"This is the k-armed bandit game for k={k}.\nThe action rewards are sampled from normal distributions, which are randomly initialized for each action with each mean uniformly sampled from ({mean_low}, {mean_high}) and each standard deviation uniformly sampled from ({stdev_low}, {stdev_high})."
+    )
 
     if verbose:
         for i, d in enumerate(distros):
             print(f"Action {i} has mean {d.mean} and stdev {d.stdev}")
-    
+
     print("*")
     for t in range(timesteps):
         action = agent.action()
@@ -47,12 +51,17 @@ def run_game(k, timesteps, verbose=False):
     return game_state.total_reward
 
 
-
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='play agent against k-armed bandit problem.')
-    parser.add_argument("-v", "--verbose", help="print agent actions and rewards.", action="store_true")
+    parser = argparse.ArgumentParser(
+        description="play agent against k-armed bandit problem."
+    )
+    parser.add_argument(
+        "-v", "--verbose", help="print agent actions and rewards.", action="store_true"
+    )
     parser.add_argument("k", type=int, help="the number of actions.")
-    parser.add_argument("timesteps", type=int, help="the number of timesteps, or actions taken.")
+    parser.add_argument(
+        "timesteps", type=int, help="the number of timesteps, or actions taken."
+    )
     args = parser.parse_args()
 
     returns = []
