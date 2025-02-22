@@ -1,7 +1,7 @@
 from bandits.DistroBandit import DistroBandit
 from distributions.Normal import Normal
 from GameState import GameState
-from agents.EpsilonGreedySampleAverageAgent import EpsilonGreedySampleAverageAgent
+from agents.EpsilonGreedy import EpsilonGreedySampleAverageAgent
 
 import random
 
