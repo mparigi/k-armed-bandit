@@ -6,4 +6,4 @@ class Normal():
 		self.stdev = stdev
 
 	def sample(self):
-		return random.gauss(self.mean, self.stdev)
+		return round(random.gauss(self.mean, self.stdev), 2)
